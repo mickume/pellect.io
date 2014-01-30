@@ -8,7 +8,25 @@
 
 # Add application configuration variables here, as shown below.
 #
-ADMIN_NAME: First User
-ADMIN_EMAIL: user@example.com
+
+# app basics
+WEBAPP_NAME: webapp
+WEBAPP_DEFAULT_URL: localhost:3000
+WEBAPP_DOMAIN: example.com
+
+# default admin user
+ADMIN_NAME: Joe Admin
+ADMIN_EMAIL: admin@example.com
 ADMIN_PASSWORD: changeme
-ROLES: [admin, user, VIP]
+
+# roles the webapp supports
+ROLES: [admin, staff, user]
+
+# SMTP settings
+SMTP_ADDRESS: smtp.example.com
+SMTP_PORT: 587
+SMTP_AUTHENTICATION: login
+SMTP_USER_NAME: example
+SMTP_PASSWORD: password
+SMTP_DEFAULT_FROM_ADDRESS: robot@example.com
+SMTP_DEFAULT_REPLY_TO_ADDRESS: no-reply@example.com
