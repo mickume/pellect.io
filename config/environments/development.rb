@@ -26,10 +26,35 @@ Webapp::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true  # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  #
+  # SMTP / basic email setup
+  #
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  # basic SMTP setup
+  config.action_mailer.smtp_settings = {
+    address: "musca.uberspace.de",
+    port: 587,
+    domain: "pellect.io",
+    authentication: "login",
+    user_name: "pelectio",
+    #password: ENV('SMTP_PASSWORD'),
+    password: "K0naBeach13",
+    enable_starttls_auto: true
+  }
+  
+  # basic email settings
+  config.action_mailer.default_options = {
+    from: "robot@pellect.io",
+    reply_to: "no-reply@pellect.io"
+  }
+  
+  # raise an error when something goes wrong with emails
   config.action_mailer.raise_delivery_errors = true
+  
   # Send email in development mode.
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
 
 end
