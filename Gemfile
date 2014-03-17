@@ -15,13 +15,14 @@ gem 'foundation-rails'
 gem 'mysql2'
 gem 'rolify'
 gem 'simple_form'
-gem 'thin'
 gem "uuid", "~> 2.3.7"
+gem 'high_voltage', '~> 2.1.0'
 
 group :development do
   gem 'rails_layout'
 end
 group :development, :test do
+  gem 'thin'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
 end
@@ -29,4 +30,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
+end
+group :production do
+  # unicorn?
 end

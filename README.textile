@@ -39,6 +39,7 @@ h2. Development
 * Form Builder: SimpleForm
 * Authentication: Devise
 * Authorization: CanCan
+* Static Pages: "high_voltage":https://github.com/thoughtbot/high_voltage
 
 h2. Email
 
