@@ -10,7 +10,7 @@
 #
 
 # app basics
-WEBAPP_NAME: webapp
+WEBAPP_NAME: EXAMPLE APP
 WEBAPP_DEFAULT_URL: localhost:3000
 WEBAPP_DOMAIN: example.com
 
