@@ -1,0 +1,24 @@
+<% if bookmark.view_count == 0 %>
+	<div class='bookmarks-row-unread'>
+<% else %>
+	<div class='bookmarks-row'>
+<% end %>
+	
+	<div class='bookmarks-favicon'>
+		<%= favicon_tag bookmark.site_id %>
+	</div>
+
+	<div class='bookmarks-desc'>
+		<%= link_to bookmark.description, "/s/#{bookmark.url_shortened}", :target => '_blank' %>
+	</div>
+	
+	<div class='bookmarks-meta'>
+		<%= bookmark_host bookmark.site_id %>
+	</div>
+	
+	<div class='bookmarks-controls'>
+		<%= link_to 'edit', edit_bookmark_path(bookmark) %>
+		<%= link_to 'delete', bookmark, method: :delete %>
+	</div>
+	
+</div>

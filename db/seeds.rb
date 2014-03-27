@@ -17,3 +17,9 @@ user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => EN
 puts 'user: ' << user.name
 user.confirm!
 user.add_role :admin
+
+puts 'DEFAULT FAVICON'
+rsrc = Resource.new
+rsrc.host = "default"
+rsrc.favicon = "default.png"
+rsrc.save!

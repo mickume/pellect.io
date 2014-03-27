@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
+# standard stuff
 gem 'rails', '4.0.4'
 gem 'sass-rails', '~> 4.0.1'
 gem 'uglifier', '>= 1.3.0'
@@ -18,6 +19,11 @@ gem 'simple_form'
 gem "uuid", "~> 2.3.7"
 gem 'high_voltage', '~> 2.1.0'
 gem 'thin'
+
+# needed for endless scrolling
+gem 'will_paginate'
+# mail-in support
+gem 'griddler', :git => 'https://github.com/ratchetcc/griddler.git'
 
 group :development do
   gem 'rails_layout'
