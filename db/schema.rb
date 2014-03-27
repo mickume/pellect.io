@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129101000) do
+ActiveRecord::Schema.define(version: 20140100000040) do
 
   create_table "roles", force: true do |t|
     t.string   "name"
