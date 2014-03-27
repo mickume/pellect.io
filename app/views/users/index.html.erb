@@ -1,30 +1,48 @@
-<h3>Users</h3>
-<div class="span8">
-<table class="table table-condensed">
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Registered</th>
-      <th>Role</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= link_to user.name, user %></td>
-      <td><%= user.email %></td>
-      <td><%= user.created_at.to_date %></td>
-      <td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
-      <td>
-        <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
-        <%= render user %>
-      </td>
-      <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="row">
+	<p>
+		
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Registered</th>
+				<th>Role</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users.each do |user| %>
+			<tr>
+				<td><%= link_to user.name, user %></td>
+				<td><%= user.email %></td>
+				<td><%= user.created_at.to_date %></td>
+				<td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
+				<td>
+					<a href="#" data-dropdown="drop1">Change role</a>
+					<ul id="drop1" class="f-dropdown" data-dropdown-content>
+					  <li><a href="#">Admin</a></li>
+					  <li><a href="#">Staff</a></li>
+					  <li><a href="#">User</a></li>
+					</ul>
+				</td>
+				<td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<ul class="pagination">
+		<li class="arrow unavailable"><a href="">&laquo;</a></li>
+		<li class="current"><a href="">1</a></li>
+		<li><a href="">2</a></li>
+		<li><a href="">3</a></li>
+		<li><a href="">4</a></li>
+		<li class="unavailable"><a href="">&hellip;</a></li>
+		<li><a href="">12</a></li>
+		<li><a href="">13</a></li>
+		<li class="arrow"><a href="">&raquo;</a></li>
+	</ul>
+	
 </div>
