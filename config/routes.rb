@@ -4,4 +4,5 @@ Webapp::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations", :passwords => "passwords"  }
   
   resources :users
+  resources :internal
 end
