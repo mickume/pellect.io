@@ -11,7 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140100000040) do
+ActiveRecord::Schema.define(version: 20140100000110) do
+
+  create_table "bookmarks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "url_shortened"
+    t.string   "description"
+    t.integer  "view_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "url_shortened_pub"
+    t.integer  "resource_id"
+    t.integer  "site_id"
+  end
+
+  add_index "bookmarks", ["created_at"], name: "index_bookmarks_on_created_at", using: :btree
+  add_index "bookmarks", ["resource_id"], name: "index_bookmarks_on_resource_id", using: :btree
+  add_index "bookmarks", ["site_id"], name: "index_bookmarks_on_site_id", using: :btree
+  add_index "bookmarks", ["updated_at"], name: "index_bookmarks_on_updated_at", using: :btree
+  add_index "bookmarks", ["url_shortened"], name: "index_bookmarks_on_url_shortened", using: :btree
+  add_index "bookmarks", ["url_shortened_pub"], name: "index_bookmarks_on_url_shortened_pub", using: :btree
+  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
+  add_index "bookmarks", ["view_count"], name: "index_bookmarks_on_view_count", using: :btree
+
+  create_table "resources", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "site_id"
+    t.string   "url"
+    t.string   "title"
+  end
+
+  add_index "resources", ["url"], name: "index_resources_on_url", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -23,6 +54,15 @@ ActiveRecord::Schema.define(version: 20140100000040) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "sites", force: true do |t|
+    t.string   "host"
+    t.string   "favicon"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sites", ["host"], name: "index_sites_on_host", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

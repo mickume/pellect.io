@@ -19,7 +19,7 @@ user.confirm!
 user.add_role :admin
 
 puts 'DEFAULT FAVICON'
-rsrc = Resource.new
-rsrc.host = "default"
-rsrc.favicon = "default.png"
-rsrc.save!
+site = Site.new
+site.host = "default"
+site.favicon = "default.png"
+site.save!
