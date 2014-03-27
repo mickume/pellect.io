@@ -1,13 +1,16 @@
 <div class="row">
 	<p>
-		
 	<table class="table table-condensed">
 		<thead>
 			<tr>
+				<th>#</th>
 				<th>Username</th>
 				<th>Email</th>
 				<th>Registered</th>
+				<th>Current IP</th>
 				<th>Role</th>
+				<th></th>
+				<th></th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -15,9 +18,11 @@
 		<tbody>
 			<% @users.each do |user| %>
 			<tr>
-				<td><%= link_to user.name, user %></td>
+				<td><%= link_to "##{user.id}", user %></td>
+				<td><%= user.name %></td>
 				<td><%= user.email %></td>
 				<td><%= user.created_at.to_date %></td>
+				<td><%= user.current_sign_in_ip %></td>
 				<td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
 				<td>
 					<a href="#" data-dropdown="drop1">Change role</a>
@@ -27,7 +32,21 @@
 					  <li><a href="#">User</a></li>
 					</ul>
 				</td>
-				<td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
+				<td>
+					<% if user_is_confirmed? user %>
+						<i class='fi-check size-24'/>
+					<% else %>
+						<i class='fi-x size-24'/>
+					<% end %>
+				</td>
+				<td>
+					<% if user_is_locked? user %>
+						<i class='fi-unlock size-24'/>
+					<% else %>
+						<i class='fi-lock size-24'/>
+					<% end %>
+				</td>
+				<td><%= link_to("<i class='fi-trash size-24'/>".html_safe, user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) unless user == current_user %></td>
 			</tr>
 			<% end %>
 		</tbody>
