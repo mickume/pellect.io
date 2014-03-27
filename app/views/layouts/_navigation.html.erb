@@ -1,12 +1,10 @@
-<%# navigation styled for Zurb Foundation 5 %>
-<nav class="top-bar" data-topbar>
-  <ul class="title-area">
-    <li class="name"><%= link_to "#{ENV['WEBAPP_NAME']}", root_path %></li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
-  <div class="top-bar-section">
-    <ul class="right">
-      <%= render 'layouts/navigation_links' %>
-    </ul>
-  </div>
-</nav>
+<div class="row">
+	<div class="large-3 columns">
+		<h1><img src="http://placehold.it/400x100&text=Logo" /></h1>
+	</div>
+	<div class="large-9 columns">
+		<ul class="inline-list right">
+			<%= render 'layouts/navigation_links' %>
+		</ul>
+	</div>
+</div>
