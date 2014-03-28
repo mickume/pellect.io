@@ -52,7 +52,6 @@
 // to make views framework-neutral
 main {
   @include twelve-columns;
-  //background-color: #eee;
   }
 section {
   @extend .row;
@@ -96,4 +95,8 @@ section {
 .authform #error_explanation h2 {
   font-size: rem-calc(16);
   color: white;
+}
+.inline-list a {
+  padding-top: 4px;
+  color: #a0a0a0;
 }
