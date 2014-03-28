@@ -1,6 +1,19 @@
-<h1>Editing bookmark</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @bookmark %> |
-<%= link_to 'Back', bookmarks_path %>
+<div class="row content">
+	<%= render 'bookmark_top' %>
+	
+	<div class="bookmark-form">
+		<%= form_for(@bookmark, :html => { :role => 'form'}) do |f| %>
+		
+			<%= f.label :Description %>
+			<%= f.text_field :description, :autofocus => true, class: 'form-control' %>
+	    	
+			<div class="form-control">
+				<%= f.submit 'Update', :class => 'button left [secondary success alert]' %>
+			</div>
+			<div class="form-alt-control">
+				or <%= link_to 'Cancel', bookmarks_path %>
+			</div>
+	 	<% end %>
+	</div>
+</div>

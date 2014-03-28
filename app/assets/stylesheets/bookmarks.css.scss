@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "foundation";
+
 .bookmarks {
   height: 100%;
   background-color: #ffffff;
@@ -73,4 +75,30 @@
 }
 .bookmark-controls-bottom > a {
   color: #d02b55;
+}
+
+.bookmark-form {
+  padding-top: 40px;
+}
+.bookmark-form form {
+  @include panel();
+  border-width: 0px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 60px;
+  background-color: #f4f4f4;
+}
+.bookmark-form form a {
+  font-size: rem-calc(13);
+}
+.bookmark-form form p {
+  font-size: rem-calc(13);
+}
+.form-control {
+  position: relative;
+}
+.form-alt-control {
+  position: relative;
+  margin-left: 130px;
+  margin-top: 34px;
 }

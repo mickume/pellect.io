@@ -10,7 +10,6 @@ class BookmarksController < ApplicationController
     @bookmarks = bookmark_stream_all
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
-    @bookmark_count_shared = 0
   end
 
   # GET /bookmarks/n
@@ -19,7 +18,6 @@ class BookmarksController < ApplicationController
     @bookmarks = bookmark_stream_new
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
-    @bookmark_count_shared = 0
     
     render :index
   end
@@ -30,7 +28,6 @@ class BookmarksController < ApplicationController
     @bookmarks = bookmark_stream_favorites
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
-    @bookmark_count_shared = 0
     
     render :index
   end
@@ -41,7 +38,6 @@ class BookmarksController < ApplicationController
     @bookmarks = bookmark_stream_all
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
-    @bookmark_count_shared = 0
     
     render :index
   end
@@ -52,7 +48,6 @@ class BookmarksController < ApplicationController
     @bookmarks = bookmark_stream_by_site params[:site_id]
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
-    @bookmark_count_shared = 0
     
     render :index
   end
@@ -70,7 +65,8 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/:id/edit
   def edit
-
+    @bookmark_count_all = bookmark_count_all current_user
+    @bookmark_count_unread = bookmark_count_unread current_user
   end
 
   # POST /bookmarks

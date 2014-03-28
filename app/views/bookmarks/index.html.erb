@@ -7,25 +7,7 @@
 <% end %>
 
 <div class="row content">
-	
-	<div class="large-7 columns">
-		<ul class="inline-list ">
-			<li><%= link_to 'ALL', '/bookmarks' %></li>
-			<li><%= link_to 'NEW', '/n' %></li>
-			<li><%= link_to 'FAVORITES', '/f' %></li>
-			<li><%= link_to 'ARCHIVE', '/a' %></li>
-		</ul>
-	</div>
-	
-	<div class="large-5 columns">
-		<div class="bookmarks-stats">You curated
-			<%= @bookmark_count_all %> resources
-			<% if @bookmark_count_unread > 0 %>
-			(<%= @bookmark_count_unread %> unread)
-			<% end %>
-			so far.
-		</div>
-	</div>
+	<%= render 'bookmark_top' %>
 	
 	<div class="small-12 columns bookmarks">
 		<div class="bookmark-input">
