@@ -1,0 +1,75 @@
+// Place all the styles related to the bookmark controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bookmarks {
+  height: 100%;
+  background-color: #ffffff;
+  color: #999999;
+}
+.bookmarks-stream {
+  background-color: #ffffff;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.bookmark {
+  height: 60px;
+  border-bottom: 1px solid #f4f4f4;
+  background-color: #ffffff;
+  position: relative;
+}
+.bookmark-unread {
+  height: 60px;
+  background-color: #f4f4f4;
+  position: relative;
+}
+.bookmark-input {
+  margin-top: 12px;
+  height: 68px;
+}
+.bookmark-favicon {
+  float: left;
+  margin-left: 10px;
+  width: 52px;
+  height: 52px;
+}
+.favicon-img {
+  margin-top: 12px;
+  width: 32px;
+  height: 32px;
+}
+.bookmark-meta {
+  font-size: 14px;
+  float: left;
+}
+.bookmark-title {
+  padding-top: 10px;
+}
+.bookmark-title > a {
+  //color: #77808c;
+  //color: #838c98;
+  color: #3d525e;
+}
+.bookmark-site {
+  font-size: 11px;
+  padding-top: 8px;
+}
+.bookmark-site > a {
+  //color: #d02b55;
+  color: #999999;
+}
+.bookmark-meta2 {
+  font-size: 11px;
+  position: relative;
+  float: right;
+  padding-right: 8px;
+}
+.bookmark-time {
+  margin-top: 10px;
+}
+.bookmark-controls {
+  margin-top: 20px;
+}
+.bookmark-controls > a {
+  color: #d02b55;
+}

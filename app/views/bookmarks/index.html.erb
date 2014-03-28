@@ -7,18 +7,19 @@
 <% end %>
 
 <div class="row content">
-	<div class="small-3 columns dashboard">
-				
-		<ul class="side-nav">
-			<li class="active">
-				<%= link_to "My Bookmarks", root_path %>
-			</li>
+	
+	<div class="large-12 columns">
+		<ul class="inline-list ">
+			<li><%= link_to 'NEW', '#' %></li>
+			<li><%= link_to 'FAVORITES', '#' %></li>
+			<li><%= link_to 'SITES', '#' %></li>
+			<li><%= link_to 'ALL', '#' %></li>
+			<li><%= link_to 'ARCHIVE', '#' %></li>
 		</ul>
-		
 	</div>
-
-	<div class="small-9 columns bookmarks">
-		<div class="bookmarks-input">
+	
+	<div class="small-12 columns bookmarks">
+		<div class="bookmark-input">
 			<%= form_for(@bookmark) do |f| %>
 			<%= text_field_tag :url, params[:url], class: "b-input", id: "appendedInputButton", placeholder: "Add a new bookmark…"  %>
 			<% end %>
