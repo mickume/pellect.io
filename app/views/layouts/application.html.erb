@@ -19,5 +19,10 @@
        <%= yield %>
     </main>
 	<%= render 'layouts/footer' %>
+	<%= javascript_tag do %>
+	  $(function() {
+	    $("time.timeago").timeago();
+	  });
+	<% end %>
   </body>
 </html>

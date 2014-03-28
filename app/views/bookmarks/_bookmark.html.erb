@@ -14,15 +14,16 @@
 			<%= link_to bookmark.description, "/s/#{bookmark.url_shortened}", :target => '_blank' %>
 		</div>
 		<div class='bookmark-site'>
-			<%= bookmark_host bookmark.site_id %>
+			<%= bookmark_host bookmark.site_id %> . <%= timeago(bookmark.created_at) %>
 		</div>
 	</div>
 	
 	<div class='bookmark-meta2'>
-		<div class='bookmark-time'>
-			just now
+		<div class='bookmark-controls-top'>
+			
 		</div>
-		<div class='bookmark-controls'>
+		<div class='bookmark-controls-bottom'>
+			<%= link_to 'nsfw', '#' %>
 			<%= link_to 'edit', edit_bookmark_path(bookmark) %>
 			<%= link_to 'delete', bookmark, method: :delete %>
 		</div>
