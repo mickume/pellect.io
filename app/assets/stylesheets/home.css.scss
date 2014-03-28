@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .teaser {
-  background-image: url('books.jpg');
+  background-image: url(image_path('books.jpg'));
+  //background-image: url('books.jpg');
   height: 380px;
 }
 
