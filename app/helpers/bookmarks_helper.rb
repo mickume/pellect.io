@@ -11,6 +11,11 @@ module BookmarksHelper
     "<img class='favicon-img' src='#{root_path + 'favicons/' + Site.find(site_id).favicon}' />".html_safe
   end
   
+  def bookmarks_by_site(site_id) 
+    host = Site.find(site_id).host
+    "<a href='/s/#{site_id}'>#{host}</a>".html_safe
+  end
+  
   def bookmark_host(site_id) 
     host = Site.find(site_id).host
     "<a href='http://#{host}' target='_blank'>#{host}</a>".html_safe

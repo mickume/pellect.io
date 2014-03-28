@@ -11,10 +11,10 @@
 
 	<div class='bookmark-meta'>
 		<div class='bookmark-title'>
-			<%= link_to bookmark.description, "/s/#{bookmark.url_shortened}", :target => '_blank' %>
+			<%= link_to bookmark.description, "/r/#{bookmark.url_shortened}", :target => '_blank' %>
 		</div>
 		<div class='bookmark-site'>
-			<%= bookmark_host bookmark.site_id %> . <%= timeago(bookmark.created_at) %>
+			<%= bookmarks_by_site bookmark.site_id %> . <%= timeago(bookmark.created_at) %>
 		</div>
 	</div>
 	
@@ -23,7 +23,6 @@
 			
 		</div>
 		<div class='bookmark-controls-bottom'>
-			<%= link_to 'nsfw', '#' %>
 			<%= link_to 'edit', edit_bookmark_path(bookmark) %>
 			<%= link_to 'delete', bookmark, method: :delete %>
 		</div>

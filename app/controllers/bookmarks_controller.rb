@@ -7,12 +7,57 @@ class BookmarksController < ApplicationController
   # GET /bookmarks
   def index
     @bookmark = Bookmark.new
-    @bookmarks = bookmark_stream
+    @bookmarks = bookmark_stream_all
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
     @bookmark_count_shared = 0
   end
 
+  # GET /bookmarks/n
+  def index_new
+    @bookmark = Bookmark.new
+    @bookmarks = bookmark_stream_new
+    @bookmark_count_all = bookmark_count_all current_user
+    @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_shared = 0
+    
+    render :index
+  end
+  
+  # GET /bookmarks/f
+  def index_favorites
+    @bookmark = Bookmark.new
+    @bookmarks = bookmark_stream_favorites
+    @bookmark_count_all = bookmark_count_all current_user
+    @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_shared = 0
+    
+    render :index
+  end
+  
+  # GET /bookmarks/a
+  def index_archive
+    @bookmark = Bookmark.new
+    @bookmarks = bookmark_stream_all
+    @bookmark_count_all = bookmark_count_all current_user
+    @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_shared = 0
+    
+    render :index
+  end
+  
+  # GET /s/:site_id
+  def by_site
+    @bookmark = Bookmark.new
+    @bookmarks = bookmark_stream_by_site params[:site_id]
+    @bookmark_count_all = bookmark_count_all current_user
+    @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_shared = 0
+    
+    render :index
+  end
+  
+  
   # GET /bookmarks/:id
   def show
 
@@ -31,7 +76,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   def create
     Bookmark.create_or_retrieve bookmark_params
-    @bookmarks = bookmark_stream
+    @bookmarks = bookmark_stream_all
     @bookmark = Bookmark.new
     
     redirect_to bookmarks_url
@@ -42,7 +87,7 @@ class BookmarksController < ApplicationController
   def update
 
     if @bookmark.update(bookmark_params)
-      @bookmarks = bookmark_stream
+      @bookmarks = bookmark_stream_all
       @bookmark = Bookmark.new
 
       redirect_to bookmarks_url
@@ -82,10 +127,22 @@ class BookmarksController < ApplicationController
     return p
   end
 
-  def bookmark_stream
+  def bookmark_stream_all
     Bookmark.where(:user_id => current_user.id).paginate(:page => params[:page]).order('created_at DESC')
   end
 
+  def bookmark_stream_new
+    Bookmark.where(:user_id => current_user.id, :view_count => 0).paginate(:page => params[:page]).order('created_at DESC')
+  end
+  
+  def bookmark_stream_favorites
+    Bookmark.where('user_id = ? and view_count > 0', current_user.id).order('view_count DESC').limit(30)
+  end
+  
+  def bookmark_stream_by_site(site)
+    Bookmark.where(:user_id => current_user.id, :site_id => site).order('created_at DESC')
+  end
+  
   def bookmark_count_all(current_user)
     Bookmark.where(user_id: current_user.id).count
   end
