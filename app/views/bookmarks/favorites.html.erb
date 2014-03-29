@@ -1,0 +1,16 @@
+<div class="row content">
+	<%= render 'bookmark_top' %>
+	
+	<div class="small-12 columns bookmarks">
+		<div class="bookmark-input">
+			<%= form_for(@bookmark) do |f| %>
+			<%= text_field_tag :url, params[:url], class: "b-input", id: "appendedInputButton", placeholder: "Add a new bookmark…"  %>
+			<% end %>
+		</div>
+		<% if !@bookmarks.blank?%>
+		<div class="bookmarks-stream">
+			<%= render :partial => "bookmark", :collection => @bookmarks%>
+		</div>
+		<% end %>
+	</div>
+</div>
