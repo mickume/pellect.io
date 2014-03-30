@@ -50,7 +50,10 @@ Webapp::Application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-
+  
+  # Log to environment log file, keep 7, max size 100mb
+  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(Rails.root.join("log", Rails.env + ".log"), 7, 104857600))
+    
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
