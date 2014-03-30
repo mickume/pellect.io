@@ -8,6 +8,7 @@
     <%# Modernizr is required for Zurb Foundation %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= yield(:javascript) %>
     <%= csrf_meta_tags %>
   </head>
   <body>
