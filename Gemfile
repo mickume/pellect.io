@@ -38,5 +38,5 @@ group :test do
   gem 'email_spec'
 end
 group :production do
-  # unicorn?
+  unicorn
 end
