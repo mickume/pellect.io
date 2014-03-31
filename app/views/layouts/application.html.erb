@@ -8,10 +8,10 @@
     <%# Modernizr is required for Zurb Foundation %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	<%= yield(:javascript) %>
     <%= csrf_meta_tags %>
   </head>
   <body>
+	<%= yield(:pre_js) %>
     <header>
       <%= render 'layouts/navigation' %>
     </header>
@@ -20,10 +20,6 @@
        <%= yield %>
     </main>
 	<%= render 'layouts/footer' %>
-	<%= javascript_tag do %>
-	  $(function() {
-	    $("time.timeago").timeago();
-	  });
-	<% end %>
+	<%= yield(:post_js) %>
   </body>
 </html>
