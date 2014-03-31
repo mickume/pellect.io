@@ -1,3 +1,11 @@
+<% content_for :pre_js do %>
+<script>
+	$('document').ready(function() {
+		intervalID = setInterval(checkScroll, -1);
+	})
+</script>
+<% end %>
+
 <div class="row content">
 	<%= render 'bookmark_top' %>
 	
@@ -8,7 +16,7 @@
 			<% end %>
 		</div>
 		<% if !@bookmarks.blank?%>
-		<div class="bookmarks-stream">
+		<div class="bookmarks-stream-noscroll">
 			<%= render :partial => "bookmark", :collection => @bookmarks%>
 		</div>
 		<% end %>
