@@ -84,3 +84,4 @@ pickle-email-*.html
 public/favicons/*
 Capfile
 newrelic.yml
+Gemfile.lock
