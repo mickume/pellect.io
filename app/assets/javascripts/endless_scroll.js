@@ -4,7 +4,7 @@ var intervalID = -1000;
 function checkScroll() {
   if (nearBottomOfPage()) {
     currentPage++;
-  
+ 
     jQuery.ajax('?page=' + currentPage, {asynchronous:true, evalScripts:true, method:'get', success: function(data, textStatus, jqXHR) {
 		$('.bookmarks-stream').append(jQuery(data).find('.bookmarks-stream').html());
 		if(typeof jQuery(data).find('.bookmarks-stream').html() == 'undefined' || jQuery(data).find('.bookmarks-stream').html().trim().length == 0){

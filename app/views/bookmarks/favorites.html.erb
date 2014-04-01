@@ -1,7 +1,8 @@
 <% content_for :pre_js do %>
 <script>
-	$('document').ready(function() {
-		intervalID = setInterval(checkScroll, -1);
+	$('document').ready(function() {	
+		if(intervalID != -1000)
+			clearInterval(intervalID);
 	})
 </script>
 <% end %>
