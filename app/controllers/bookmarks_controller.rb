@@ -29,7 +29,7 @@ class BookmarksController < ApplicationController
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
     
-    render :favorites
+    render :index_noscroll
   end
   
   # GET /bookmarks/a
@@ -49,7 +49,7 @@ class BookmarksController < ApplicationController
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
     
-    render :index
+    render :index_noscroll
   end
   
   
