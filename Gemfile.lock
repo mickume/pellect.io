@@ -191,6 +191,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  addressable
   cancan
   capybara
   coffee-rails (~> 4.0.0)

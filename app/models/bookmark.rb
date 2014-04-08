@@ -33,9 +33,8 @@ class Bookmark < ActiveRecord::Base
   end
 
   def self.create_bookmark(params)
-    # normalize the url first
+    # the url to add
     url = params[:url]
-    url = "http://" + url if url.index("http").nil?
     
     # scrap the site's favicon
     host = URI(url).host

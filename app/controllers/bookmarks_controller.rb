@@ -1,3 +1,6 @@
+
+require 'addressable/uri'
+
 class BookmarksController < ApplicationController
 
   before_filter :authenticate_user!
@@ -116,13 +119,27 @@ class BookmarksController < ApplicationController
     if params[:bookmark]
       p = params[:bookmark].permit(:url,:description)
       p[:user_id] = current_user.id
+      p[:url] = normalize_url params[:url]
     else
-      p = {:url => params.require(:url), :user_id => current_user.id }
+      p = {:url => normalize_url( params.require(:url)), :user_id => current_user.id }
     end
 
+    puts p.to_s
     return p
   end
 
+  # normalize the url
+  def normalize_url(url)
+    uri = Addressable::URI.parse url
+    if uri.scheme == nil
+      uri = Addressable::URI.parse ("http://" + url)
+    end
+    uri.normalize.to_s
+  end
+  
+  #
+  # helpers to select the right bookmarks
+  #
   def bookmark_stream_all
     Bookmark.where(:user_id => current_user.id).paginate(:page => params[:page]).order('created_at DESC')
   end
