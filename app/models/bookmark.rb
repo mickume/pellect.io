@@ -1,5 +1,4 @@
 
-require 'nokogiri'
 require 'open-uri'
 
 class Bookmark < ActiveRecord::Base

@@ -1,4 +1,6 @@
 
+require 'nokogiri'
+
 class Resource < ActiveRecord::Base
   
   # Extract a pages title from the HTML stuff. Use the url as title if none is available. 
