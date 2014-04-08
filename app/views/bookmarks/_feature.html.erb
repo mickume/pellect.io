@@ -1,0 +1,26 @@
+<div class='bookmark-featured'>
+	<div class='bookmark-favicon'>
+		<%= favicon_tag feature.site_id %>
+	</div>
+
+
+	<div class='bookmark-meta'>
+		<div class='bookmark-title'>
+			<%= link_to feature.description, "/r/#{feature.url_shortened}", :target => '_blank' %>
+		</div>
+		<div class='bookmark-site'>
+			<%= bookmarks_by_site feature.site_id %> . <%= timeago(feature.created_at) %>
+		</div>
+	</div>
+	
+	<div class='bookmark-meta2'>
+		<div class='bookmark-controls-top'>
+			
+		</div>
+		<div class='bookmark-controls-bottom'>
+			<%= link_to 'edit', edit_bookmark_path(feature) %>
+			<%= link_to 'delete', feature, method: :delete %>
+		</div>
+	</div>
+
+</div>

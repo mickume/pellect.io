@@ -19,6 +19,11 @@
   margin-left: -15px;
   margin-right: -15px;
 }
+.features-stream {
+  background-color: #ffffff;
+  margin-left: -15px;
+  margin-right: -15px;
+}
 .bookmarks-stats {
   color: #999999;
   float: right;
@@ -37,6 +42,12 @@
 .bookmark-unread {
   height: 60px;
   background-color: #f4f4f4;
+  position: relative;
+  border-bottom: 1px solid #dddddd;
+}
+.bookmark-featured {
+  height: 60px;
+  background-color: #e2f2d5;
   position: relative;
   border-bottom: 1px solid #dddddd;
 }

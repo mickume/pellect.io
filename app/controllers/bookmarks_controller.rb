@@ -11,6 +11,8 @@ class BookmarksController < ApplicationController
   def index
     @bookmark = Bookmark.new
     @bookmarks = bookmark_stream_all
+    @features = bookmark_stream_featured
+        
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
   end
@@ -154,6 +156,18 @@ class BookmarksController < ApplicationController
   
   def bookmark_stream_by_site(site)
     Bookmark.where(:user_id => current_user.id, :site_id => site).order('created_at DESC')
+  end
+  
+  # return a random selection of bookmarks; just a crude implementation, should be optimized with e.g. caching for some time
+  def bookmark_stream_featured
+    bookmarks = Bookmark.where(user_id: current_user.id, view_count: 0)
+    features = []
+    n = bookmarks.count
+    
+    features << bookmarks[ Random.new.rand(1..n)]
+    features << bookmarks[ Random.new.rand(1..n)]
+    
+    features
   end
   
   def bookmark_count_all(current_user)

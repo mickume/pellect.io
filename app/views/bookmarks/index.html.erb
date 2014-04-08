@@ -16,8 +16,12 @@
 			<% end %>
 		</div>
 		<% if !@bookmarks.blank?%>
+		<div class="features-stream">
+			<%= render :partial => "feature", :collection => @features %>
+			<hr/>
+		</div>
 		<div class="bookmarks-stream">
-			<%= render :partial => "bookmark", :collection => @bookmarks%>
+			<%= render :partial => "bookmark", :collection => @bookmarks %>
 		</div>
 		<% end %>
 	</div>
