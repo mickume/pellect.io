@@ -11,3 +11,101 @@
  *= require_self
  *= require_tree .
  */
+
+// import the CSS framework
+@import "foundation";
+
+// THESE ARE EXAMPLES YOU CAN MODIFY
+// create mixins using Foundation classes
+@mixin twelve-columns {
+	@extend .small-12;
+	@extend .columns;
+}
+@mixin six-columns-centered {
+	@extend .small-6;
+	@extend .columns;
+	@extend .text-center;
+}
+
+.column {
+	@include six-columns-centered;
+}  
+
+.inline-list a {
+	padding-top: 4px;
+	color: #a0a0a0;
+}
+
+.bold_text {
+	padding-top: 4px;
+	font-size: 16px;
+	color: #a0a0a0;
+}
+.static-page {
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 12px;
+}
+
+// used to style the foundation icons
+.size-12 { font-size: 12px; }
+.size-14 { font-size: 14px; }  
+.size-16 { font-size: 16px; }
+.size-18 { font-size: 18px; }
+.size-21 { font-size: 21px; }
+.size-24 { font-size: 24px; }
+.size-36 { font-size: 36px; }
+.size-48 { font-size: 48px; }
+.size-60 { font-size: 60px; }
+.size-72 { font-size: 72px; }
+
+// styles used for DEVISE views
+.authform {
+  padding-top: 30px;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.authform form {
+  @include panel();
+  padding-bottom: 60px;
+}
+.authform form a {
+  font-size: rem-calc(13);
+}
+.authform form p {
+  font-size: rem-calc(13);
+}
+.authform form h3 {
+	color: #a0a0a0;
+}
+.authform .form-group {
+  // not used
+}
+.authform .checkbox {
+	margin-top: 16px;
+}
+.authform .form-bottom {
+	position: absolute;
+	margin-top: 24px;
+}
+.authform fieldset {
+  @include panel();
+}
+.authform #error_explanation {
+  @extend .alert-box;
+  @extend .alert;
+}
+.authform #error_explanation h2 {
+  font-size: rem-calc(16);
+  color: white;
+}
+
+// document sections
+main {
+	@include twelve-columns;
+	background-color: #eee;
+}
+section {
+	@extend .row;
+	margin-top: 20px;
+}
