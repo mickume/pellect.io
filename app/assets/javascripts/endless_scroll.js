@@ -7,6 +7,9 @@ function checkScroll() {
  
     jQuery.ajax('?page=' + currentPage, {asynchronous:true, evalScripts:true, method:'get', success: function(data, textStatus, jqXHR) {
 		$('.bookmarks-stream').append(jQuery(data).find('.bookmarks-stream').html());
+		
+		$("time.timeago").timeago();
+		
 		if(typeof jQuery(data).find('.bookmarks-stream').html() == 'undefined' || jQuery(data).find('.bookmarks-stream').html().trim().length == 0){
 			clearInterval(intervalID);
 		}

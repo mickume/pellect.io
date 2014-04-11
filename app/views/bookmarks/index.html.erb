@@ -1,5 +1,9 @@
 <% content_for :pre_js do %>
 <script>
+	$(function() {
+  	  $("time.timeago").timeago();
+	});
+
 	$('document').ready(function() {
 		intervalID = setInterval(checkScroll, 200);
 	})
@@ -26,9 +30,3 @@
 		<% end %>
 	</div>
 </div>
-
-<%= javascript_tag do %>
-  $(function() {
-    $("time.timeago").timeago();
-  });
-<% end %>
