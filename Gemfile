@@ -18,7 +18,6 @@ gem 'rolify'
 gem 'simple_form'
 gem "uuid", "~> 2.3.7"
 gem 'high_voltage', '~> 2.1.0'
-gem 'thin'
 gem 'addressable'
 
 # needed for endless scrolling
@@ -27,6 +26,7 @@ gem 'will_paginate'
 gem 'griddler', :git => 'https://github.com/ratchetcc/griddler.git'
 
 group :development do
+  gem 'thin'
   gem 'rails_layout'
 end
 group :development, :test do

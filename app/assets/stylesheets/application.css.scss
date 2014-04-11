@@ -103,7 +103,6 @@
 // document sections
 main {
 	@include twelve-columns;
-	background-color: #eee;
 }
 section {
 	@extend .row;
