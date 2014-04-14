@@ -17,13 +17,11 @@ gem 'high_voltage', '~> 2.1.0'
 gem 'addressable'
 
 # asset gems
-#group :assets do
-  gem 'sass-rails', '~> 4.0.3'
-  gem 'foundation-rails'
-  gem 'foundation-icons-sass-rails'
-  gem 'uglifier', '>= 2.5.0'
-  gem 'coffee-rails', '~> 4.0.1'
-#end
+gem 'sass-rails', '~> 4.0.3'
+gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
+gem 'uglifier', '>= 2.5.0'
+gem 'coffee-rails', '~> 4.0.1'
 
 # needed for endless scrolling
 gem 'will_paginate'
