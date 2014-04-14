@@ -161,11 +161,14 @@ class BookmarksController < ApplicationController
   # return a random selection of bookmarks; just a crude implementation, should be optimized with e.g. caching for some time
   def bookmark_stream_featured
     bookmarks = Bookmark.where(user_id: current_user.id, view_count: 0)
+    
     features = []
     n = bookmarks.count
     
-    features << bookmarks[ Random.new.rand(1..n)]
-    features << bookmarks[ Random.new.rand(1..n)]
+    unless n == 0
+      features << bookmarks[ Random.new.rand(1..n)]
+      features << bookmarks[ Random.new.rand(1..n)]
+    end
     
     features
   end
