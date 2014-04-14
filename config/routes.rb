@@ -16,4 +16,8 @@ Webapp::Application.routes.draw do
   # receive emails
   post '/api/1/email_processor' => 'emails#create'
   
+  # admin stuff
+  post '/users/lock/:id' => 'users#lock'
+  post '/users/unlock/:id' => 'users#unlock'
+  
 end

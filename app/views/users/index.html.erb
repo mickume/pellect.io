@@ -40,10 +40,12 @@
 					<% end %>
 				</td>
 				<td>
-					<% if user_is_locked? user %>
-						<i class='fi-unlock size-24'/>
-					<% else %>
-						<i class='fi-lock size-24'/>
+					<% if user != current_user %>
+						<% if user.blocked? %>
+							<%= link_to("", "/users/unlock/#{user.id}", :method => :post, :class => "fi-unlock size-24") %>
+						<% else %>
+							<%= link_to("", "/users/lock/#{user.id}", :method => :post, :class => "fi-lock size-24") %>
+						<% end %>
 					<% end %>
 				</td>
 				<td><%= link_to("<i class='fi-trash size-24'/>".html_safe, user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) unless user == current_user %></td>

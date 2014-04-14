@@ -19,7 +19,29 @@ class UsersController < ApplicationController
       redirect_to users_path, :alert => "Unable to update user."
     end
   end
+  
+  def lock
+    authorize! :lock, @user, :message => 'Not authorized as an administrator.'
     
+    user = User.find(params[:id])
+    user.blocked = true
+    user.save!
+    
+    redirect_to :controller => 'users', :action => 'index'
+    
+  end
+  
+  def unlock
+    authorize! :unlock, @user, :message => 'Not authorized as an administrator.'
+    
+    user = User.find(params[:id])
+    user.blocked = false
+    user.save!
+    
+    redirect_to :controller => 'users', :action => 'index'
+    
+  end
+  
   def destroy
     user = User.find(params[:id])
     unless user == current_user
