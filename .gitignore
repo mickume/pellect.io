@@ -12,7 +12,6 @@
 /config/config.yml
 /config/database.yml
 /config/application.yml
-/config/piwik.yml
 
 # documentation
 /doc/api/

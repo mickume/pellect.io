@@ -33,3 +33,7 @@ SMTP_DEFAULT_REPLY_TO_ADDRESS: no-reply@example.com
 
 # other app settings
 SHORT_URL_LENGTH: 6
+
+# analytics settings
+TRACKING_URL: localhost
+TRACKING_ID: 1
