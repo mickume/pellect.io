@@ -29,9 +29,6 @@ gem 'will_paginate'
 # mail-in support
 gem 'griddler', :git => 'https://github.com/ratchetcc/griddler.git'
 
-# analytics support
-gem 'piwik_analytics', '~> 1.0.0'
-
 group :development do
   gem 'thin'
   gem 'rails_layout'
