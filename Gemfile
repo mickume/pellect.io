@@ -25,8 +25,12 @@ gem 'coffee-rails', '~> 4.0.1'
 
 # needed for endless scrolling
 gem 'will_paginate'
+
 # mail-in support
 gem 'griddler', :git => 'https://github.com/ratchetcc/griddler.git'
+
+# analytics support
+gem 'piwik_analytics', '~> 1.0.0'
 
 group :development do
   gem 'thin'
