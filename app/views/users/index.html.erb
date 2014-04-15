@@ -1,58 +1,69 @@
 <div class="row">
 	<p>
-	<table class="table table-condensed">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Username</th>
-				<th>Email</th>
-				<th>Registered</th>
-				<th>Current IP</th>
-				<th>Role</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @users.each do |user| %>
-			<tr>
-				<td><%= link_to "##{user.id}", user %></td>
-				<td><%= user.name %></td>
-				<td><%= user.email %></td>
-				<td><%= user.created_at.to_date %></td>
-				<td><%= user.current_sign_in_ip %></td>
-				<td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
-				<td>
-					<a href="#" data-dropdown="drop1" class="tiny button dropdown">Change role</a>
-					<ul id="drop1" data-dropdown-content class="f-dropdown">
-						<% @roles.each do |role| %>
-							<li><a href='#'><%= role.name.titleize %></a></li>
-						<% end %>
-					</ul>
-				</td>
-				<td>
-					<% if user_is_confirmed? user %>
-						<i class='fi-check size-24'/>
-					<% else %>
-						<i class='fi-x size-24'/>
-					<% end %>
-				</td>
-				<td>
-					<% if user != current_user %>
-						<% if user.blocked? %>
-							<%= link_to("", "/users/unlock/#{user.id}", :method => :post, :class => "fi-unlock size-24") %>
+	<div class="small-2 columns">
+		<ul class="side-nav">
+		  <li><a href="#">MAIN</a></li>
+		  <li class="active"><a href="#">USERS</a></li>
+		  <li><a href="#">PREFERENCES</a></li>
+		  <li><a href="#">AUDIT</a></li>
+		</ul>
+	</div>
+
+	<div class="small-10 columns">
+
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Registered</th>
+					<th>Current IP</th>
+					<th>Role</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+				<tr>
+					<td><%= link_to "##{user.id}", user %></td>
+					<td><%= user.name %></td>
+					<td><%= user.email %></td>
+					<td><%= user.created_at.to_date %></td>
+					<td><%= user.current_sign_in_ip %></td>
+					<td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
+					<td>
+						<a href="#" data-dropdown="role_dd" data-options="is_hover:true">Change Role</a>
+						<ul id="role_dd" class="f-dropdown" data-dropdown-content>
+							<% @roles.each do |role| %>
+								<li><a href='#'><%= role.name.titleize %></a></li>
+							<% end %>
+						</ul>
+					</td>
+					<td>
+						<% if user_is_confirmed? user %>
+							<i class='fi-check size-24'/>
 						<% else %>
-							<%= link_to("", "/users/lock/#{user.id}", :method => :post, :class => "fi-lock size-24") %>
+							<i class='fi-x size-24'/>
 						<% end %>
-					<% end %>
-				</td>
-				<td><%= link_to("<i class='fi-trash size-24'/>".html_safe, user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) unless user == current_user %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
+					</td>
+					<td>
+						<% if user != current_user %>
+							<% if user.blocked? %>
+								<%= link_to("", "/users/unlock/#{user.id}", :method => :post, :class => "fi-unlock size-24") %>
+							<% else %>
+								<%= link_to("", "/users/lock/#{user.id}", :method => :post, :class => "fi-lock size-24") %>
+							<% end %>
+						<% end %>
+					</td>
+					<td><%= link_to("<i class='fi-trash size-24'/>".html_safe, user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete) unless user == current_user %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
 	
 	<ul class="pagination">
 		<li class="arrow unavailable"><a href="">&laquo;</a></li>
@@ -65,5 +76,6 @@
 		<li><a href="">13</a></li>
 		<li class="arrow"><a href="">&raquo;</a></li>
 	</ul>
-	
+
+	</div>
 </div>

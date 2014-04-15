@@ -3,7 +3,7 @@
 
 <% if user_signed_in? %>
 	<% if user_has_admin_role? %>
-		<li><%= link_to 'USERS', users_path %></li>
+		<li><%= link_to 'ADMIN', users_path %></li>
 	<% end %>
 	
 	<li><%= link_to 'MY ACCOUNT', edit_user_registration_path %></li>
