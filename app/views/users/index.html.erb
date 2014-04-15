@@ -25,11 +25,11 @@
 				<td><%= user.current_sign_in_ip %></td>
 				<td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
 				<td>
-					<a href="#" data-dropdown="drop1">Change role</a>
-					<ul id="drop1" class="f-dropdown" data-dropdown-content>
-					  <li><a href="#">Admin</a></li>
-					  <li><a href="#">Staff</a></li>
-					  <li><a href="#">User</a></li>
+					<a href="#" data-dropdown="drop1" class="tiny button dropdown">Change role</a>
+					<ul id="drop1" data-dropdown-content class="f-dropdown">
+						<% @roles.each do |role| %>
+							<li><a href='#'><%= role.name.titleize %></a></li>
+						<% end %>
 					</ul>
 				</td>
 				<td>
