@@ -15,6 +15,7 @@ class BookmarksController < ApplicationController
         
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
+    
   end
 
   # GET /bookmarks/n
@@ -165,7 +166,7 @@ class BookmarksController < ApplicationController
     features = []
     n = bookmarks.count
     
-    unless n == 0
+    unless n < 16
       features << bookmarks[ Random.new.rand(1..n)]
       features << bookmarks[ Random.new.rand(1..n)]
     end

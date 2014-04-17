@@ -20,4 +20,7 @@ Webapp::Application.routes.draw do
   post '/users/lock/:id' => 'users#lock'
   post '/users/unlock/:id' => 'users#unlock'
   
+  # internal background stuff
+  get 'internal/age' => 'background_tasks#age_bookmarks'
+  get 'internal/expire' => 'background_tasks#expire_bookmarks'
 end

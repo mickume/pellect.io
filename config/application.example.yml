@@ -37,3 +37,7 @@ SHORT_URL_LENGTH: 6
 # analytics settings
 TRACKING_URL: localhost
 TRACKING_ID: 1
+
+# URL expiration
+URL_TTL: 128	# days to live, in the beginning
+URL_EXPIRES: 16 # url is about to expire
