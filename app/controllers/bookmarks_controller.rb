@@ -169,6 +169,7 @@ class BookmarksController < ApplicationController
     unless n < 16
       features << bookmarks[ Random.new.rand(1..n)]
       features << bookmarks[ Random.new.rand(1..n)]
+      features << bookmarks[ Random.new.rand(1..n)]
     end
     
     features
