@@ -9,7 +9,7 @@
 			<%= link_to feature.description, "/r/#{feature.url_shortened}", :target => '_blank' %>
 		</div>
 		<div class='bookmark-site'>
-			<%= bookmarks_by_site feature.site_id %> . <%= timeago(feature.created_at) %>
+			<%= bookmarks_by_site feature.site_id %> . Added <%= timeago(feature.created_at) %> . <%= feature.time_to_expiration %> days left
 		</div>
 	</div>
 	

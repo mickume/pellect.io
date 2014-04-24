@@ -22,6 +22,8 @@ class BookmarksController < ApplicationController
   def index_new
     @bookmark = Bookmark.new
     @bookmarks = bookmark_stream_new
+    @features = bookmark_stream_featured
+    
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
     
@@ -122,7 +124,7 @@ class BookmarksController < ApplicationController
     if params[:bookmark]
       p = params[:bookmark].permit(:url,:description)
       p[:user_id] = current_user.id
-      p[:url] = normalize_url params[:url]
+      p[:url] = normalize_url params[:url] if params[:url]
     else
       p = {:url => normalize_url( params.require(:url)), :user_id => current_user.id }
     end
