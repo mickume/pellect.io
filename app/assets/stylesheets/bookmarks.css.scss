@@ -40,16 +40,17 @@
   border-bottom: 1px solid #f4f4f4;
 }
 .bookmark-unread {
-  height: 60px;
+  @extend .bookmark;
   background-color: #f4f4f4;
-  position: relative;
   border-bottom: 1px solid #dddddd;
 }
+.bookmark-expired {
+  @extend .bookmark;
+  background-color: #fcd059;
+}
 .bookmark-featured {
-  height: 60px;
+  @extend .bookmark;
   background-color: #e2f2d5;
-  position: relative;
-  border-bottom: 1px solid #dddddd;
 }
 .bookmark-favicon {
   float: left;

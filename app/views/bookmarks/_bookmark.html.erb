@@ -1,4 +1,6 @@
-<% if bookmark.view_count == 0 %>
+<% if bookmark.time_to_expiration < 16 %>
+<div class='bookmark-expired'>
+<% elsif bookmark.view_count == 0 %>
 <div class='bookmark-unread'>
 <% else %>
 <div class='bookmark'>
@@ -14,7 +16,7 @@
 			<%= link_to bookmark.description, "/r/#{bookmark.url_shortened}", :target => '_blank' %>
 		</div>
 		<div class='bookmark-site'>
-			<%= bookmarks_by_site bookmark.site_id %> . <%= timeago(bookmark.created_at) %>
+			<%= bookmarks_by_site bookmark.site_id %> . Added <%= timeago(bookmark.created_at) %> . <%= bookmark.time_to_expiration %> days left
 		</div>
 	</div>
 	
