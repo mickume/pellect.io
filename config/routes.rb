@@ -11,6 +11,8 @@ Webapp::Application.routes.draw do
   get '/a', :to => 'bookmarks#index_archive'
   get '/s/:site_id', :to => 'bookmarks#by_site'
   
+  post '/a/:bookmark', :to => 'bookmarks#archive'
+  
   # redirect shortened urls
   get '/r/:short_url', :to => 'shortened_links#translate'
   # receive emails

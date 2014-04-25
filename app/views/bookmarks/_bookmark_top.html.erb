@@ -1,4 +1,4 @@
-<div class="large-7 columns">
+<div class="large-6 columns">
 	<ul class="inline-list ">
 		<li><%= link_to 'ALL', root_path %></li>
 		<li><%= link_to 'FAVORITES', '/f' %></li>
@@ -6,11 +6,14 @@
 	</ul>
 </div>
 
-<div class="large-5 columns">
+<div class="large-6 columns">
 	<div class="bookmarks-stats">You curated
 		<%= @bookmark_count_all %> links so far.
 		<% if @bookmark_count_unread > 0 %>
 			<%= link_to "#{@bookmark_count_unread} are still unread.", '/n' %>
+		<% end %>
+		<% if @bookmark_count_archived > 0 %>
+			<%= link_to "#{@bookmark_count_archived} archived.", '/a' %>
 		<% end %>
 	</div>
 </div>

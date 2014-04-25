@@ -16,7 +16,10 @@
 			<%= link_to bookmark.description, "/r/#{bookmark.url_shortened}", :target => '_blank' %>
 		</div>
 		<div class='bookmark-site'>
-			<%= bookmarks_by_site bookmark.site_id %> . Added <%= timeago(bookmark.created_at) %> . <%= bookmark.time_to_expiration %> days left
+			<%= bookmarks_by_site bookmark.site_id %> . Added <%= timeago(bookmark.created_at) %> 
+			<% if !bookmark.archived %>
+				. <%= bookmark.time_to_expiration %> days left
+			<% end %>
 		</div>
 	</div>
 	
@@ -25,6 +28,9 @@
 			
 		</div>
 		<div class='bookmark-controls-bottom'>
+			<% if !bookmark.archived %>
+				<%= link_to("archive", "/a/#{bookmark.id}", :method => :post) %>
+			<% end %>
 			<%= link_to 'edit', edit_bookmark_path(bookmark) %>
 			<%= link_to 'delete', bookmark, method: :delete %>
 		</div>

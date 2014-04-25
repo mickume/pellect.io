@@ -1,5 +1,5 @@
 namespace :pellectio do
-  desc "TODO"
+  desc "add expiration field"
   task expiration_setup: :environment do
     bookmarks = Bookmark.all
     
@@ -19,6 +19,16 @@ namespace :pellectio do
       
     end
     
-  end
+  end # expiration_setup:
 
+  desc "add archive flag"
+  task archive_setup: :environment do
+    bookmarks = Bookmark.all
+    
+    bookmarks.each do |b|
+      b.archived = false
+      b.save!
+    end
+  end # archive_setup:
+  
 end

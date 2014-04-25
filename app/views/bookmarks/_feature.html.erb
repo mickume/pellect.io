@@ -18,6 +18,7 @@
 			
 		</div>
 		<div class='bookmark-controls-bottom'>
+			<%= link_to("archive", "/a/#{feature.id}", :method => :post) %>
 			<%= link_to 'edit', edit_bookmark_path(feature) %>
 			<%= link_to 'delete', feature, method: :delete %>
 		</div>

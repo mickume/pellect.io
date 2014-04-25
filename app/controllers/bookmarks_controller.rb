@@ -15,7 +15,7 @@ class BookmarksController < ApplicationController
         
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
-    
+    @bookmark_count_archived = bookmark_count_archived current_user
   end
 
   # GET /bookmarks/n
@@ -26,6 +26,7 @@ class BookmarksController < ApplicationController
     
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_archived = bookmark_count_archived current_user
     
     render :index
   end
@@ -34,8 +35,10 @@ class BookmarksController < ApplicationController
   def index_favorites
     @bookmark = Bookmark.new
     @bookmarks = bookmark_stream_favorites
+    
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_archived = bookmark_count_archived current_user
     
     render :index_noscroll
   end
@@ -43,9 +46,11 @@ class BookmarksController < ApplicationController
   # GET /bookmarks/a
   def index_archive
     @bookmark = Bookmark.new
-    @bookmarks = bookmark_stream_all
+    @bookmarks = bookmark_stream_archived
+    
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_archived = bookmark_count_archived current_user
     
     render :index
   end
@@ -54,8 +59,10 @@ class BookmarksController < ApplicationController
   def by_site
     @bookmark = Bookmark.new
     @bookmarks = bookmark_stream_by_site params[:site_id]
+    
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_archived = bookmark_count_archived current_user
     
     render :index_noscroll
   end
@@ -106,6 +113,17 @@ class BookmarksController < ApplicationController
     redirect_to bookmarks_url
   end
 
+  # POST /a/:bookmark
+  def archive
+    bookmark = Bookmark.find(params[:bookmark])
+    if bookmark
+      bookmark.archived = true
+      bookmark.save!
+    end
+    
+    redirect_to(request.referrer || root_path) 
+  end
+  
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -146,11 +164,15 @@ class BookmarksController < ApplicationController
   # helpers to select the right bookmarks
   #
   def bookmark_stream_all
-    Bookmark.where(:user_id => current_user.id).paginate(:page => params[:page]).order('created_at DESC')
+    Bookmark.where(:user_id => current_user.id, :archived => false).paginate(:page => params[:page]).order('created_at DESC')
   end
 
+  def bookmark_stream_archived
+    Bookmark.where(:user_id => current_user.id, :archived => true).paginate(:page => params[:page]).order('created_at DESC')
+  end
+  
   def bookmark_stream_new
-    Bookmark.where(:user_id => current_user.id, :view_count => 0).paginate(:page => params[:page]).order('created_at DESC')
+    Bookmark.where(:user_id => current_user.id, :view_count => 0, :archived => false).paginate(:page => params[:page]).order('created_at DESC')
   end
   
   def bookmark_stream_favorites
@@ -183,6 +205,10 @@ class BookmarksController < ApplicationController
   
   def bookmark_count_unread(current_user)
     Bookmark.where(user_id: current_user.id, view_count: 0).count
+  end
+  
+  def bookmark_count_archived(current_user)
+    Bookmark.where(user_id: current_user.id, archived: true).count
   end
   
 end

@@ -2,9 +2,8 @@ class BackgroundTasksController < ApplicationController
   
   def age_bookmarks
     Thread.new do
-      # use a SQL statement !!!!!
       
-      bookmarks = Bookmark.all
+      bookmarks = Bookmark.where(:archived => false)
       bookmarks.each do |b|
         b.time_to_expiration = b.time_to_expiration - 1
         b.save!
@@ -17,9 +16,8 @@ class BackgroundTasksController < ApplicationController
   
   def expire_bookmarks
     Thread.new do
-      # use a SQL statement !!!!!
       
-      bookmarks = Bookmark.where("time_to_expiration < #{Figaro.env.url_expires.to_i}")
+      bookmarks = Bookmark.where("time_to_expiration < 0")
       bookmarks.each do |b|
         b.destroy!
       end
