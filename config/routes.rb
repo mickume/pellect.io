@@ -15,8 +15,6 @@ Webapp::Application.routes.draw do
   
   # redirect shortened urls
   get '/r/:short_url', :to => 'shortened_links#translate'
-  # receive emails
-  post '/api/1/email_processor' => 'emails#create'
   
   # admin stuff
   post '/users/lock/:id' => 'users#lock'
