@@ -91,7 +91,6 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new
     
     redirect_to bookmarks_url
-    
   end
 
   # PATCH/PUT /bookmarks/:id
@@ -185,15 +184,15 @@ class BookmarksController < ApplicationController
   
   # return a random selection of bookmarks; just a crude implementation, should be optimized with e.g. caching for some time
   def bookmark_stream_featured
-    bookmarks = Bookmark.where(user_id: current_user.id, view_count: 0)
+    bookmarks = Bookmark.where(user_id: current_user.id, archived: false)
     
     features = []
     n = bookmarks.count
     
     unless n < 16
-      features << bookmarks[ Random.new.rand(1..n)]
-      features << bookmarks[ Random.new.rand(1..n)]
-      features << bookmarks[ Random.new.rand(1..n)]
+      features << bookmarks[ Random.new.rand(0..n)]
+      features << bookmarks[ Random.new.rand(0..n)]
+      features << bookmarks[ Random.new.rand(0..n)]
     end
     
     features
