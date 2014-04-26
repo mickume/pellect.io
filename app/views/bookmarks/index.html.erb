@@ -19,7 +19,7 @@
 			<%= text_field_tag :url, params[:url], class: "b-input", id: "appendedInputButton", placeholder: "Add a new bookmark…"  %>
 			<% end %>
 		</div>
-		<% if !@features.empty? %>
+		<% if !@features.blank? %>
 		<div class="features-stream">
 			<%= render :partial => "feature", :collection => @features %>
 			<hr/>
