@@ -55,6 +55,18 @@ class BookmarksController < ApplicationController
     render :index
   end
   
+  # GET /bookmarks/o
+  def index_oldest
+    @bookmark = Bookmark.new
+    @bookmarks = bookmark_stream_oldest
+    
+    @bookmark_count_all = bookmark_count_all current_user
+    @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_archived = bookmark_count_archived current_user
+    
+    render :index
+  end
+  
   # GET /s/:site_id
   def by_site
     @bookmark = Bookmark.new
@@ -82,6 +94,7 @@ class BookmarksController < ApplicationController
   def edit
     @bookmark_count_all = bookmark_count_all current_user
     @bookmark_count_unread = bookmark_count_unread current_user
+    @bookmark_count_archived = bookmark_count_archived current_user
   end
 
   # POST /bookmarks
@@ -165,7 +178,11 @@ class BookmarksController < ApplicationController
   def bookmark_stream_all
     Bookmark.where(:user_id => current_user.id, :archived => false).paginate(:page => params[:page]).order('created_at DESC')
   end
-
+  
+  def bookmark_stream_oldest
+    Bookmark.where(:user_id => current_user.id, :archived => false).paginate(:page => params[:page]).order('created_at ASC')
+  end
+  
   def bookmark_stream_archived
     Bookmark.where(:user_id => current_user.id, :archived => true).paginate(:page => params[:page]).order('created_at DESC')
   end
@@ -187,7 +204,7 @@ class BookmarksController < ApplicationController
     bookmarks = Bookmark.where(user_id: current_user.id, archived: false)
     
     features = []
-    n = bookmarks.count
+    n = bookmarks.count -  1
     
     unless n < 16
       features << bookmarks[ Random.new.rand(0..n)]

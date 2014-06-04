@@ -9,6 +9,7 @@ Webapp::Application.routes.draw do
   get '/n', :to => 'bookmarks#index_new'
   get '/f', :to => 'bookmarks#index_favorites'
   get '/a', :to => 'bookmarks#index_archive'
+  get '/o', :to => 'bookmarks#index_oldest'
   get '/s/:site_id', :to => 'bookmarks#by_site'
   
   post '/a/:bookmark', :to => 'bookmarks#archive'
