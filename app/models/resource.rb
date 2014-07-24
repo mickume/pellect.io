@@ -9,7 +9,13 @@ class Resource < ActiveRecord::Base
     begin
       # scrap the web page's title
       page = Nokogiri::HTML(open(url))
-      title = page.xpath('//head/title').children[0].content.squish
+      title = page.xpath('//head/title').children[0].content
+      
+      # remove whitespace
+      title = title.squish
+      # shorten if needed
+      title = title[0..50].gsub(/\s\w+\s*$/, '...')
+      
     rescue
       # just catch the exception
     end

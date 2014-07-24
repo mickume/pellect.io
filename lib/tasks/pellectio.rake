@@ -35,13 +35,15 @@ namespace :pellectio do
   task whitespace: :environment do
     bookmarks = Bookmark.all
     bookmarks.each do |b|
-      b.description = b.description.squish()
+      b.description = b.description.squish
+      b.description = b.description[0..50].gsub(/\s\w+\s*$/, '...')
       b.save!
     end
     
     rsrc = Resource.all
     rsrc.each do |r|
-      r.title = r.title.squish()
+      r.title = r.title.squish
+      r.title = r.title[0..50].gsub(/\s\w+\s*$/, '...')
       r.save!
     end
     
