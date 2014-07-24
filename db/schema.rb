@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425071310) do
+ActiveRecord::Schema.define(version: 20140724090736) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id"
@@ -25,10 +25,12 @@ ActiveRecord::Schema.define(version: 20140425071310) do
     t.integer  "site_id"
     t.integer  "time_to_expiration"
     t.boolean  "archived"
+    t.boolean  "expired"
   end
 
   add_index "bookmarks", ["archived"], name: "index_bookmarks_on_archived", using: :btree
   add_index "bookmarks", ["created_at"], name: "index_bookmarks_on_created_at", using: :btree
+  add_index "bookmarks", ["expired"], name: "index_bookmarks_on_expired", using: :btree
   add_index "bookmarks", ["resource_id"], name: "index_bookmarks_on_resource_id", using: :btree
   add_index "bookmarks", ["site_id"], name: "index_bookmarks_on_site_id", using: :btree
   add_index "bookmarks", ["time_to_expiration"], name: "index_bookmarks_on_time_to_expiration", using: :btree

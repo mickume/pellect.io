@@ -76,6 +76,7 @@ class Bookmark < ActiveRecord::Base
     bookmark.description = rsrc.title if bookmark.description.nil?
     bookmark.time_to_expiration = Figaro.env.url_ttl
     bookmark.archived = false
+    bookmark.expired = false
     
     # add the site_id to the bookmark
     bookmark.site_id = site.id

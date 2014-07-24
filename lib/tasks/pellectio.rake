@@ -31,6 +31,16 @@ namespace :pellectio do
     end
   end # archive_setup:
   
+  desc "add expired flag"
+  task expired_setup: :environment do
+    bookmarks = Bookmark.all
+    
+    bookmarks.each do |b|
+      b.expired = false
+      b.save!
+    end
+  end # expired_setup::
+  
   desc "remove whitespace from descriptions and title"
   task whitespace: :environment do
     bookmarks = Bookmark.all

@@ -19,7 +19,8 @@ class BackgroundTasksController < ApplicationController
       
       bookmarks = Bookmark.where("time_to_expiration < 0")
       bookmarks.each do |b|
-        b.destroy!
+        b.expired = true
+        b.save!
       end
       
     end

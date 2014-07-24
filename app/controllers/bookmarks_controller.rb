@@ -176,19 +176,19 @@ class BookmarksController < ApplicationController
   # helpers to select the right bookmarks
   #
   def bookmark_stream_all
-    Bookmark.where(:user_id => current_user.id, :archived => false).paginate(:page => params[:page]).order('created_at DESC')
+    Bookmark.where(:user_id => current_user.id, :expired => false, :archived => false).paginate(:page => params[:page]).order('created_at DESC')
   end
   
   def bookmark_stream_oldest
-    Bookmark.where(:user_id => current_user.id, :archived => false).paginate(:page => params[:page]).order('created_at ASC')
+    Bookmark.where(:user_id => current_user.id, :expired => false, :archived => false).paginate(:page => params[:page]).order('created_at ASC')
   end
   
   def bookmark_stream_archived
-    Bookmark.where(:user_id => current_user.id, :archived => true).paginate(:page => params[:page]).order('created_at DESC')
+    Bookmark.where(:user_id => current_user.id, :expired => false, :archived => true).paginate(:page => params[:page]).order('created_at DESC')
   end
   
   def bookmark_stream_new
-    Bookmark.where(:user_id => current_user.id, :view_count => 0, :archived => false).paginate(:page => params[:page]).order('created_at DESC')
+    Bookmark.where(:user_id => current_user.id, :view_count => 0, :expired => false, :archived => false).paginate(:page => params[:page]).order('created_at DESC')
   end
   
   def bookmark_stream_favorites
@@ -201,7 +201,7 @@ class BookmarksController < ApplicationController
   
   # return a random selection of bookmarks; just a crude implementation, should be optimized with e.g. caching for some time
   def bookmark_stream_featured
-    bookmarks = Bookmark.where(user_id: current_user.id, archived: false)
+    bookmarks = Bookmark.where(user_id: current_user.id, expired: false,  archived: false)
     
     features = []
     n = bookmarks.count -  1
