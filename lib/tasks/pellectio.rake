@@ -31,4 +31,20 @@ namespace :pellectio do
     end
   end # archive_setup:
   
+  desc "remove whitespace from descriptions and title"
+  task whitespace: :environment do
+    bookmarks = Bookmark.all
+    bookmarks.each do |b|
+      b.description = b.description.squish()
+      b.save!
+    end
+    
+    rsrc = Resource.all
+    rsrc.each do |r|
+      r.title = r.title.squish()
+      r.save!
+    end
+    
+  end
+  
 end
