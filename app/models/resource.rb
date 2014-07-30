@@ -14,7 +14,7 @@ class Resource < ActiveRecord::Base
       # remove whitespace
       title = title.squish
       # shorten if needed
-      title = title[0..50].gsub(/\s\w+\s*$/, '...')
+      title = title[0..100].gsub(/\s\w+\s*$/, '...')
       
     rescue
       # just catch the exception
