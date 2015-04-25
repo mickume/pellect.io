@@ -8,4 +8,3 @@ Did I already mention that pellect.io is not social? I do not want to share my b
 
 And then there is the problem of stale bookmark lists. It is easy to collect hundreds of links in a short time but how many are still relevant after 3 weeks? Or how many sites already went to the dead-pool since you added the link? pellect.io is an experiment to address this issue.
 
-And no, I'm not building an instapaper clone. In fact, both services are complimentary and I will integrate instapaper pretty soon.
