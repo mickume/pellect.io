@@ -27,7 +27,7 @@ gem 'coffee-rails', '~> 4.0.1'
 gem 'will_paginate'
 
 # mail-in support
-gem 'griddler', :git => 'https://github.com/ratchetcc/griddler.git'
+# gem 'griddler', :git => 'https://github.com/ratchetcc/griddler.git'
 
 group :development do
   gem 'thin'
