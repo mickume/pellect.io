@@ -1,36 +1,34 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.4.2'
 
 # standard stuff
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 5.1.1'
 gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
 gem 'cancan'
 gem 'devise'
 gem 'figaro'
-gem 'mysql2'
+gem 'pg', '~> 0.21.0'
 gem 'rolify'
-gem 'simple_form', '~> 3.0.2'
-gem "uuid", "~> 2.3.7"
-gem 'high_voltage', '~> 2.1.0'
+gem 'simple_form'
+gem "uuid"
+gem 'high_voltage'
 gem 'addressable'
+gem 'puma', '~> 3.7'
 
 # asset gems
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0'
 gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
-gem 'uglifier', '>= 2.5.0'
-gem 'coffee-rails', '~> 4.0.1'
+gem 'uglifier', '>= 1.3.0'
+gem 'therubyracer', platforms: :ruby
+gem 'coffee-rails', '~> 4.2'
 
 # needed for endless scrolling
 gem 'will_paginate'
 
-# mail-in support
-# gem 'griddler', :git => 'https://github.com/ratchetcc/griddler.git'
-
 group :development do
-  gem 'thin'
   gem 'rails_layout'
 end
 group :development, :test do
@@ -43,5 +41,4 @@ group :test do
   gem 'email_spec'
 end
 group :production do
-  gem 'unicorn'
 end

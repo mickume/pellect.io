@@ -10,7 +10,6 @@
 # configuration files
 /config/secrets.yml
 /config/config.yml
-/config/database.yml
 /config/application.yml
 
 # documentation
