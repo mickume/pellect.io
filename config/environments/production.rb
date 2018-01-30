@@ -46,14 +46,22 @@ Webapp::Application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  # config.log_tags = [ :subdomain, :uuid ]
+  config.log_tags = [ :request_id ]
+
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
+
+  # Use a different logger on a container platform
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
   
   # Log to environment log file, keep 7, max size 100mb
-  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(Rails.root.join("log", Rails.env + ".log"), 7, 104857600))
-    
+  #config.logger = ActiveSupport::TaggedLogging.new(Logger.new(Rails.root.join("log", Rails.env + ".log"), 7, 104857600))
+  
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
@@ -83,6 +91,4 @@ Webapp::Application.configure do
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
 end
