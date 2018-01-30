@@ -1,4 +1,4 @@
-class DbRefact1 < ActiveRecord::Migration
+class DbRefact1 < ActiveRecord::Migration[5.1]
   def change
     
     # add new columns

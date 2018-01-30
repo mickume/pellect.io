@@ -1,4 +1,4 @@
-class Expired < ActiveRecord::Migration
+class Expired < ActiveRecord::Migration[5.1]
   def change
     add_column :bookmarks, :expired, :boolean
     

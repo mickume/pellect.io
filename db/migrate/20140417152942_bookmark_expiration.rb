@@ -1,4 +1,4 @@
-class BookmarkExpiration < ActiveRecord::Migration
+class BookmarkExpiration < ActiveRecord::Migration[5.1]
   def change
     add_column :bookmarks, :time_to_expiration, :integer
     
