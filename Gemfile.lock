@@ -237,7 +237,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   foundation-icons-sass-rails
-  foundation-rails
+  foundation-rails (~> 6.3)
   high_voltage
   jbuilder (~> 2.5)
   jquery-rails

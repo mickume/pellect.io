@@ -19,9 +19,7 @@
 /doc/specs.html
 
 # public / cached
-/public/cache
-/public/stylesheets/compiled
-/public/system/*
+/public/assets/**
 /spec/tmp/*
 /cache
 /gems

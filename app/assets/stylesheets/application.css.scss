@@ -19,14 +19,16 @@
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create mixins using Foundation classes
 @mixin twelve-columns {
-	@extend .small-12;
-	@extend .columns;
+	//@extend .small-12;
+	//@extend .columns;
 }
+
 @mixin six-columns-centered {
-	@extend .small-6;
-	@extend .columns;
-	@extend .text-center;
+	//@extend .small-12;
+	//@extend .columns;
+	//@extend .text-center;
 }
+
 
 .column {
 	@include six-columns-centered;
@@ -67,7 +69,7 @@
   margin: 0 auto;
 }
 .authform form {
-  @include panel();
+  //@include panel();
   padding-bottom: 60px;
 }
 .authform form a {
@@ -90,11 +92,11 @@
 	margin-top: 24px;
 }
 .authform fieldset {
-  @include panel();
+  //@include panel();
 }
 .authform #error_explanation {
-  @extend .alert-box;
-  @extend .alert;
+  //@extend .alert-box;
+  //@extend .alert;
 }
 .authform #error_explanation h2 {
   font-size: rem-calc(16);
@@ -106,6 +108,6 @@ main {
 	@include twelve-columns;
 }
 section {
-	@extend .row;
+	//@extend .row;
 	margin-top: 20px;
 }
