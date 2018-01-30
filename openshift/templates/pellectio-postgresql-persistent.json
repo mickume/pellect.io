@@ -160,7 +160,7 @@
               "failurePolicy": "Abort",
               "execNewPod": {
                 "command": [
-                  "./migrate-database.sh"
+                  "./bin/migrate-database.sh"
                 ],
                 "containerName": "${NAME}"
               }
