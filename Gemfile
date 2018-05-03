@@ -1,31 +1,45 @@
 source 'https://rubygems.org'
 
-# standard stuff
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
+  "https://github.com/#{repo_name}.git"
+end
+
+# The standard stuff
 gem 'rails', '~> 5.1.1'
-gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
-gem 'cancan'
-gem 'devise'
-gem 'figaro'
+# Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21.0'
+# Use Puma as the app server
+gem 'puma', '~> 3.7'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.2'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.5'
+# Authentication & Authorization
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise_invitable'
+
+# Application specific stuff
+gem 'cancan'
+gem 'figaro'
 gem 'rolify'
 gem 'simple_form'
 gem "uuid"
 gem 'high_voltage'
 gem 'addressable'
-gem 'puma', '~> 3.7'
-
-# asset gems
-gem 'sass-rails', '~> 5.0'
 gem 'foundation-rails', '~> 6.3'
 gem 'foundation-icons-sass-rails'
-gem 'uglifier', '>= 1.3.0'
-gem 'therubyracer', platforms: :ruby
-gem 'coffee-rails', '~> 4.2'
-
 # needed for endless scrolling
 gem 'will_paginate'
+
+# Development support
 
 group :development do
   gem 'rails_layout'
@@ -39,5 +53,4 @@ group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
 end
-group :production do
-end
+
