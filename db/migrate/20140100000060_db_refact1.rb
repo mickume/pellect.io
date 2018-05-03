@@ -6,7 +6,7 @@ class DbRefact1 < ActiveRecord::Migration[5.1]
     add_column :bookmarks, :title, :string  # the <title></title> of the page
     
     # some indicies
-    add_index :bookmarks, :user_id
+    # add_index :bookmarks, :user_id
     add_index :bookmarks, :url
     add_index :bookmarks, :url_shortened
     add_index :bookmarks, :url_shortened_pub
