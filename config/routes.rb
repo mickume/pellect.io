@@ -24,4 +24,8 @@ Webapp::Application.routes.draw do
   # internal background stuff
   get 'internal/age' => 'background_tasks#age_bookmarks'
   get 'internal/expire' => 'background_tasks#expire_bookmarks'
+
+  # health checks for the app
+  get 'status/ready', to: 'health_checks#readiness'
+  get 'status/live', to: 'health_checks#liveness'
 end
