@@ -3,9 +3,9 @@
 #
 
 # add the default roles
-Role.find_or_create_by_name("admin")
-Role.find_or_create_by_name("staff")
-Role.find_or_create_by_name("user")
+CreateRoleService.new.call("admin")
+CreateRoleService.new.call("staff")
+CreateRoleService.new.call("user")
 
 # add the admin user
 admin = CreateAdminUserService.new.call
