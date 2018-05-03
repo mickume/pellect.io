@@ -8,7 +8,7 @@ class ShortenedLinksController < ApplicationController
       b.increment(:view_count)
       
       # add some days to prevent the bookmark from expiring
-      ttl = Figaro.env.url_ttl.to_i
+      ttl = 128
       if b.time_to_expiration < (ttl * 2)
         if b.view_count < 8
           b.time_to_expiration = b.time_to_expiration + (2 ** b.view_count)

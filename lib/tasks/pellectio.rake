@@ -4,7 +4,7 @@ namespace :pellectio do
     bookmarks = Bookmark.all
     
     now = DateTime.now.to_date
-    ttl = Figaro.env.url_ttl.to_i
+    ttl = 128
     
     bookmarks.each do |b|
     

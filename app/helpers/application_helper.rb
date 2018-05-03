@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def application_name
+		Rails.application.secrets.app_name
+  end
+  
   def user_has_admin_role?
     current_user.has_role? :admin
   end

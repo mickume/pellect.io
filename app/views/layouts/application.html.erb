@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : ENV['WEBAPP_NAME'] %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : ENV['WEBAPP_NAME'] %>">
+    <title><%= content_for?(:title) ? yield(:title) : application_name %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : application_name %>">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%# Modernizr is required for Zurb Foundation %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -21,6 +21,5 @@
     </main>
 	<%= render 'layouts/footer' %>
 	<%= yield(:post_js) %>
-	<%= tracking_tag %>
   </body>
 </html>

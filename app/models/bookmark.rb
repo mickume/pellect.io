@@ -74,7 +74,7 @@ class Bookmark < ActiveRecord::Base
     bookmark.url_shortened_pub = Bookmark.generate_public_short_url(url, params[:user_id])
     bookmark.description = params[:description]
     bookmark.description = rsrc.title if bookmark.description.nil?
-    bookmark.time_to_expiration = Figaro.env.url_ttl
+    bookmark.time_to_expiration = 128
     bookmark.archived = false
     bookmark.expired = false
     
