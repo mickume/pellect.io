@@ -36,6 +36,7 @@ gem 'high_voltage'
 gem 'addressable'
 gem 'foundation-rails', '~> 6.3'
 gem 'foundation-icons-sass-rails'
+gem 'jquery-rails'
 # needed for endless scrolling
 gem 'will_paginate'
 
