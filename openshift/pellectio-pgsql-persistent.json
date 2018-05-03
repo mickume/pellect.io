@@ -4,18 +4,18 @@
   "metadata": {
     "name": "pellectio-pgsql-persistent",
     "annotations": {
-      "openshift.io/display-name": "pellect.io",
-      "description": "pellect.io, links, bookmarks and curating web content",
+      "openshift.io/display-name": "Pellect.io Starter App",
+      "description": "RAILS 5.1 SaaS Starter App - Batteries Included",
       "tags": "quickstart,ruby,rails",
       "iconClass": "icon-ruby",
-      "openshift.io/long-description": "This template defines resources needed to develop the Rails application, including a build configuration, application deployment configuration, and database deployment configuration.",
+      "openshift.io/long-description": "This template defines resources needed to deploy the Rails application, including a build configuration, application deployment configuration, and database deployment configuration.",
       "openshift.io/provider-display-name": "ratchet;labs",
       "openshift.io/documentation-url": "https://github.com/mickuehl/pellect.io",
       "openshift.io/support-url": "https://github.com/mickuehl/pellect.io",
       "template.openshift.io/bindable": "false"
     }
   },
-  "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n",
+  "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/openshift/rails-ex/blob/master/README.md.",
   "labels": {
       "template": "pellectio-pgsql-persistent",
       "app": "pellectio-pgsql-persistent"
@@ -31,8 +31,10 @@
         "database-user" : "${DATABASE_USER}",
         "database-password" : "${DATABASE_PASSWORD}",
         "application-user" : "${APPLICATION_USER}",
+        "application-user-email" : "${APPLICATION_USER_EMAIL}",
         "application-password" : "${APPLICATION_PASSWORD}",
-        "keybase" : "${SECRET_KEY_BASE}"
+        "keybase" : "${SECRET_KEY_BASE}",
+        "rails-master-key" : "${RAILS_MASTER_KEY}"
       }
     },
     {
@@ -107,12 +109,103 @@
             "from": {
               "kind": "ImageStreamTag",
               "namespace": "${NAMESPACE}",
-              "name": "ruby:2.4"
+              "name": "ruby:2.3"
             },
             "env": [
               {
-                "name": "RUBYGEM_MIRROR",
-                "value": "${RUBYGEM_MIRROR}"
+                "name": "DATABASE_SERVICE_NAME",
+                "value": "${DATABASE_SERVICE_NAME}"
+              },
+              {
+                "name": "POSTGRESQL_USER",
+                "valueFrom": {
+                  "secretKeyRef" : {
+                    "name" : "${NAME}",
+                    "key" : "database-user"
+                  }
+                }
+              },
+              {
+                "name": "POSTGRESQL_PASSWORD",
+                "valueFrom": {
+                  "secretKeyRef" : {
+                    "name" : "${NAME}",
+                    "key" : "database-password"
+                  }
+                }
+              },
+              {
+                "name": "SECRET_KEY_BASE",
+                "valueFrom": {
+                  "secretKeyRef" : {
+                    "name" : "${NAME}",
+                    "key" : "keybase"
+                  }
+                }
+              },
+              {
+                "name": "POSTGRESQL_DATABASE",
+                "value": "${DATABASE_NAME}"
+              },
+              {
+                "name": "POSTGRESQL_MAX_CONNECTIONS",
+                "value": "${POSTGRESQL_MAX_CONNECTIONS}"
+              },
+              {
+                "name": "POSTGRESQL_SHARED_BUFFERS",
+                "value": "${POSTGRESQL_SHARED_BUFFERS}"
+              },
+              {
+                "name": "APPLICATION_DOMAIN",
+                "value": "${APPLICATION_DOMAIN}"
+              },
+              {
+                "name": "APPLICATION_USER",
+                "valueFrom": {
+                  "secretKeyRef" : {
+                    "name" : "${NAME}",
+                    "key" : "application-user"
+                  }
+                }
+              },
+              {
+                "name": "APPLICATION_USER_EMAIL",
+                "valueFrom": {
+                  "secretKeyRef" : {
+                    "name" : "${NAME}",
+                    "key" : "application-user-email"
+                  }
+                }
+              },
+              {
+                "name": "APPLICATION_PASSWORD",
+                "valueFrom": {
+                  "secretKeyRef" : {
+                    "name" : "${NAME}",
+                    "key" : "application-password"
+                  }
+                }
+              },
+              {
+                "name": "RAILS_ENV",
+                "value": "${RAILS_ENV}"
+              },
+              {
+                "name": "RAILS_MASTER_KEY",
+                "valueFrom": {
+                  "secretKeyRef" : {
+                    "name" : "${NAME}",
+                    "key" : "rails-master-key"
+                  }
+                }
+              },
+              {
+                "name": "RAILS_SERVE_STATIC_FILES",
+                "value": "${RAILS_SERVE_STATIC_FILES}"
+              },
+              {
+                "name": "RAILS_ENFORCE_SSL",
+                "value": "${RAILS_ENFORCE_SSL}"
               }
             ]
           }
@@ -207,18 +300,18 @@
                   }
                 ],
                 "readinessProbe": {
-                  "timeoutSeconds": 3,
-                  "initialDelaySeconds": 5,
+                  "timeoutSeconds": 5,
+                  "initialDelaySeconds": 30,
                   "httpGet": {
-                    "path": "/articles",
+                    "path": "/status/ready",
                     "port": 8080
                   }
                 },
                 "livenessProbe": {
                   "timeoutSeconds": 3,
-                  "initialDelaySeconds": 10,
+                  "initialDelaySeconds": 60,
                   "httpGet": {
-                    "path": "/articles",
+                    "path": "/status/live",
                     "port": 8080
                   }
                 },
@@ -280,6 +373,15 @@
                     }
                   },
                   {
+                    "name": "APPLICATION_USER_EMAIL",
+                    "valueFrom": {
+                      "secretKeyRef" : {
+                        "name" : "${NAME}",
+                        "key" : "application-user-email"
+                      }
+                    }
+                  },
+                  {
                     "name": "APPLICATION_PASSWORD",
                     "valueFrom": {
                       "secretKeyRef" : {
@@ -291,6 +393,23 @@
                   {
                     "name": "RAILS_ENV",
                     "value": "${RAILS_ENV}"
+                  },
+                  {
+                    "name": "RAILS_MASTER_KEY",
+                    "valueFrom": {
+                      "secretKeyRef" : {
+                        "name" : "${NAME}",
+                        "key" : "rails-master-key"
+                      }
+                    }
+                  },
+                  {
+                    "name": "RAILS_SERVE_STATIC_FILES",
+                    "value": "${RAILS_SERVE_STATIC_FILES}"
+                  },
+                  {
+                    "name": "RAILS_ENFORCE_SSL",
+                    "value": "${RAILS_ENFORCE_SSL}"
                   }
                 ],
                 "resources": {
@@ -510,7 +629,7 @@
       "displayName": "Git Repository URL",
       "required": true,
       "description": "The URL of the repository with your application source code.",
-      "value": "https://github.com/mickuehl/pellect.io.git"
+      "value": "https://github.com/mickuehl/pellect.io"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
@@ -543,11 +662,24 @@
       "from": "[a-z0-9]{127}"
     },
     {
+      "name": "RAILS_MASTER_KEY",
+      "displayName": "RAILS Master Key",
+      "description": "Used to read encrypted secrets from `config/secrets.yml.enc`",
+      "value": "secret"
+    },
+    {
       "name": "APPLICATION_USER",
       "displayName": "Application Username",
       "required": true,
       "description": "The application user that is used within the sample application to authorize access on pages.",
-      "value": "openshift"
+      "value": "admin"
+    },
+    {
+      "name": "APPLICATION_USER_EMAIL",
+      "displayName": "Application Username EMail",
+      "required": true,
+      "description": "The application user that is used within the sample application to authorize access on pages.",
+      "value": "admin@example.com"
     },
     {
       "name": "APPLICATION_PASSWORD",
@@ -562,6 +694,18 @@
       "required": true,
       "description": "Environment under which the sample application will run. Could be set to production, development or test.",
       "value": "production"
+    },
+    {
+      "name": "RAILS_SERVE_STATIC_FILES",
+      "displayName": "Rails serve static files",
+      "description": "Enable serving static files from the `/public` folder by default",
+      "value": "true"
+    },
+    {
+      "name": "RAILS_ENFORCE_SSL",
+      "displayName": "Rails enforce SSL",
+      "description": "Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.",
+      "value": "false"
     },
     {
       "name": "DATABASE_SERVICE_NAME",
