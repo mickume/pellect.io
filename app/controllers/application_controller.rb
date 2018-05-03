@@ -9,12 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def blocked_user?
-    if !current_user.nil?
-      if current_user.blocked?
-        sign_out current_user
-        redirect_to root_path, :notice => "Your account has been blocked - Please contact us for details"
-      end
-    end
+    user_is_locked? current_user
   end
   
 end
