@@ -3,7 +3,7 @@ require 'addressable/uri'
 
 class BookmarksController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
   before_action :protect_bookmark!, only: [:show, :edit, :update, :destroy]
 
