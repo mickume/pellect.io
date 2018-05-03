@@ -37,6 +37,7 @@ gem 'addressable'
 gem 'foundation-rails', '~> 6.3'
 gem 'foundation-icons-sass-rails'
 gem 'jquery-rails'
+gem 'turbolinks'
 # needed for endless scrolling
 gem 'will_paginate'
 
