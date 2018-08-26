@@ -7,6 +7,7 @@
 # DO NOT COMMIT THIS TO ANY SCM !
 application.yml
 .env
+deployments/pellectio-secrets.yaml
 
 # Ignore bundler config.
 /.bundle

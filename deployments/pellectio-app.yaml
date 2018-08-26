@@ -1,0 +1,308 @@
+apiVersion: v1
+items:
+- kind: ImageStream
+  apiVersion: "v1"
+  metadata:
+    annotations:
+      description: Keeps track of changes in the application image
+    name: 'pellectio'
+
+- kind: BuildConfig
+  apiVersion: "v1"
+  metadata:
+    annotations:
+      description: Defines how to build the application
+      template.alpha.openshift.io/wait-for-ready: 'true'
+    name: 'pellectio'
+  spec:
+    output:
+      to:
+        kind: ImageStreamTag
+        name: 'pellectio:latest'
+    postCommit:
+      script: ''
+    source:
+      type: Git
+      git:
+        uri: 'https://github.com/mickuehl/pellect.io.git'
+        ref: 'master'
+      contextDir: ''
+    strategy:
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+        # define all parameters that are needed during the build !
+        env:
+          # database configuration
+          - name: DATABASE_SERVICE_NAME
+            value: 'postgresql'
+          
+          - name: POSTGRESQL_USER
+            valueFrom:
+              secretKeyRef:
+                key: database-user
+                name: pellectio
+          
+          - name: POSTGRESQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: database-password
+                name: pellectio
+          
+          - name: POSTGRESQL_DATABASE
+            value: 'root'
+          
+          - name: POSTGRESQL_MAX_CONNECTIONS
+            value: '50'
+          
+          - name: POSTGRESQL_SHARED_BUFFERS
+            value: '12MB'
+          
+          # admin user
+          - name: APPLICATION_USER
+            valueFrom:
+              secretKeyRef:
+                key: application-user
+                name: pellectio
+          
+          - name: APPLICATION_USER_EMAIL
+            valueFrom:
+              secretKeyRef:
+                key: application-user-email
+                name: pellectio
+          
+          - name: APPLICATION_USER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: application-user-password
+                name: pellectio
+          
+          # SMTP
+          - name: SMTP_PROVIDER_HOST
+            value: 'smtp.mailgun.org'
+            
+          - name: SMTP_PROVIDER_PORT
+            value: '587'
+
+          - name: SMTP_PROVIDER_DOMAIN
+            value: 'thearchivi.st'
+            
+          - name: SMTP_PROVIDER_USERNAME
+            valueFrom:
+              secretKeyRef:
+                key: smtp-provider-username
+                name: pellectio
+
+          - name: SMTP_PROVIDER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: smtp-provider-password
+                name: pellectio
+
+          # RAILS app configuration
+          - name: APPLICATION_HOSTNAME
+            value: 'www.thearchivi.st'
+
+          - name: DOMAIN_NAME
+            value: 'thearchivi.st'
+                
+          - name: RAILS_ENV
+            value: 'production'
+
+          - name: SECRET_KEY_BASE
+            valueFrom:
+              secretKeyRef:
+                key: keybase
+                name: pellectio
+
+          - name: RAILS_MASTER_KEY
+            valueFrom:
+              secretKeyRef:
+                key: rails-master-key
+                name: pellectio
+          
+          - name: RAILS_SERVE_STATIC_FILES
+            value: 'true'
+          
+          - name: RAILS_ENFORCE_SSL
+            value: 'false'
+
+          - name: RUBYGEM_MIRROR
+            value: ''
+      
+    triggers:
+      - type: ConfigChange
+      - github:
+          secret: secret101
+        type: GitHub
+      
+- kind: DeploymentConfig
+  apiVersion: "v1"
+  metadata:
+    annotations:
+      description: Defines how to deploy the application server
+      template.alpha.openshift.io/wait-for-ready: 'true'
+    name: 'pellectio'
+  spec:
+    replicas: 1
+    selector:
+      name: 'pellectio'
+    strategy:
+      type: Recreate
+      recreateParams:
+        pre:
+          execNewPod:
+            command:
+              - migrate-database
+            containerName: 'pellectio'
+          failurePolicy: Abort
+      
+    template:
+      metadata:
+        labels:
+          name: 'pellectio'
+        name: 'pellectio'
+      spec:
+        containers:
+          - env:
+              # database configuration
+            - name: DATABASE_SERVICE_NAME
+              value: 'postgresql'
+            
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  key: database-user
+                  name: pellectio
+            
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: database-password
+                  name: pellectio
+            
+            - name: POSTGRESQL_DATABASE
+              value: 'root'
+            
+            - name: POSTGRESQL_MAX_CONNECTIONS
+              value: '50'
+            
+            - name: POSTGRESQL_SHARED_BUFFERS
+              value: '12MB'
+            
+            # admin user
+            - name: APPLICATION_USER
+              valueFrom:
+                secretKeyRef:
+                  key: application-user
+                  name: pellectio
+            
+            - name: APPLICATION_USER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: application-user-email
+                  name: pellectio
+            
+            - name: APPLICATION_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: application-user-password
+                  name: pellectio
+            
+            # SMTP
+            - name: SMTP_PROVIDER_HOST
+              value: 'smtp.mailgun.org'
+              
+            - name: SMTP_PROVIDER_PORT
+              value: '587'
+
+            - name: SMTP_PROVIDER_DOMAIN
+              value: 'thearchivi.st'
+              
+            - name: SMTP_PROVIDER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: smtp-provider-username
+                  name: pellectio
+            
+            - name: SMTP_PROVIDER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: smtp-provider-password
+                  name: pellectio
+
+            # RAILS app configuration
+            - name: APPLICATION_HOSTNAME
+              value: 'www.thearchivi.st'
+
+            - name: DOMAIN_NAME
+              value: 'thearchivi.st'
+                  
+            - name: RAILS_ENV
+              value: 'production'
+
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  key: keybase
+                  name: pellectio
+
+            - name: RAILS_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: rails-master-key
+                  name: pellectio
+            
+            - name: RAILS_SERVE_STATIC_FILES
+              value: 'true'
+            
+            - name: RAILS_ENFORCE_SSL
+              value: 'false'
+
+            image: ''
+            
+            livenessProbe:
+              httpGet:
+                path: /status/live
+                port: 8080
+              initialDelaySeconds: 60
+              timeoutSeconds: 3
+            name: 'pellectio'
+            ports:
+              - containerPort: 8080
+            readinessProbe:
+              httpGet:
+                path: /status/ready
+                port: 8080
+              initialDelaySeconds: 30
+              timeoutSeconds: 5
+            resources:
+              limits:
+                memory: '256Mi'
+    triggers:
+      - imageChangeParams:
+          automatic: true
+          containerNames:
+            - 'pellectio'
+          from:
+            kind: ImageStreamTag
+            name: 'pellectio:latest'
+        type: ImageChange
+      - type: ConfigChange
+
+- kind: Service
+  apiVersion: "v1"
+  metadata:
+    annotations:
+      description: Exposes and load balances the application pods
+      service.alpha.openshift.io/dependencies: '[{"name": "postgresql", "kind": "Service"}]'
+    name: 'pellectio'
+  spec:
+    ports:
+      - name: web
+        port: 8080
+        targetPort: 8080
+    selector:
+      name: 'pellectio'
+      
+kind: List
+metadata: []
